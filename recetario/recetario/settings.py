@@ -157,3 +157,11 @@ LOGGING = {
         },
     }
 }
+
+#Configuración para enviar correos desde gmail.
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'mxdaniel@gmail.com'
+EMAIL_HOST_PASSWORD = 'gmail9613'
+EMAIL_PORT = 587
+
