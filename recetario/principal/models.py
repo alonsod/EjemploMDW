@@ -25,7 +25,7 @@ class Receta(models.Model):
 
 class Comentario(models.Model):
 	receta = models.ForeignKey(Receta)
-	texto = models.TextField(help_text='DEjanos tu comentario', verbose_name='Comentario')
+	texto = models.TextField(help_text='Dejanos tu comentario', verbose_name='Comentario')
 
 	def __unicode__(self):
 		return self.texto

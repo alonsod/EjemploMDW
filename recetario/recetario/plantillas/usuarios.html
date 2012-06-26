@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block contenido %}
+	<a href="/usuario/nuevo">Agregar usuario</a>
 	<ul>
 		{% for dato in usuarios %}
 		<li>{{dato.username|capfirst}} - <em>{{dato.email}} </em> 

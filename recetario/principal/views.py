@@ -5,6 +5,12 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.core.mail import EmailMessage
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
+
+
 
 def sobre(request):
 	html="<html><body> proyecto ejemplo</body></html>"
@@ -12,12 +18,12 @@ def sobre(request):
 
 def inicio(request):
 	recetas = Receta.objects.all()
-	return render_to_response('inicio.html',{'recetas':recetas})
+	return render_to_response('inicio.html',{'recetas':recetas}, context_instance=RequestContext(request))
 
 def usuarios(request):
 	usuarios = User.objects.all()
 	recetas = Receta.objects.all()
-	return render_to_response('usuarios.html',{'usuarios':usuarios,'recetas':recetas})
+	return render_to_response('usuarios.html',{'usuarios':usuarios,'recetas':recetas}, context_instance=RequestContext(request))
 
 def lista_recetas(request):
 	recetas = Receta.objects.all()
@@ -62,3 +68,12 @@ def nuevo_comentario(request):
 		formulario = ComentarioForm()
 	return render_to_response('comentarioform.html', {'formulario':formulario}, context_instance=RequestContext(request))
 
+def nuevo_usuario(request):
+	if request.method =='POST':
+		formulario = UserCreationForm(request.POST)
+		if  formulario.is_valid():
+			formulario.save()
+			return HttpResponseRedirect('/')
+	else:
+		formulario =UserCreationForm()
+	return render_to_response('nuevousuario.html', {'formulario':formulario}, context_instance=RequestContext(request))
